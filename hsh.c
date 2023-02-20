@@ -7,12 +7,9 @@
 
 int main(void)
 {
-	extern char **environ;
 	char *lineptr;
 	size_t size = 32;
-	int i, status;
-	pid_t pid;
-	char *args[2];
+	int i;
 
 	while (1)
 	{
@@ -25,36 +22,16 @@ int main(void)
 		}
 		i = _getline(&lineptr, &size, stdin);
 		if (i == -1)
+		{
+			printf("\n");
 			break;
+		}
 		lineptr[i - 1] = '\0';
 		if (strlen(lineptr) == 0)
 			continue;
 		else
 		{
-			pid = fork();
-			if (pid == -1)
-			{
-				perror("fork");
-				exit(EXIT_FAILURE);
-			}
-			else if (pid == 0)
-			{
-				args[0] = lineptr;
-				args[1] = NULL;
-				if (execve(args[0], args, environ) == -1)
-				{
-					perror("./hsh ");
-					exit(EXIT_FAILURE);
-				}
-			}
-			else
-			{
-				if (wait(&status) == -1)
-				{
-					perror("wait");
-					exit(EXIT_FAILURE);
-				}
-			}
+			_execute(lineptr);
 			if (strcmp(lineptr, "exit") == 0)
 				break;
 			free(lineptr);
