@@ -7,8 +7,10 @@
 #include <string.h>
 #include <sys/wait.h>
 
+char **environ;
+
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 char **_strtok(char *str, const char *delim);
-int _execute(char *input);
+int _execute(char **argc);
 
 #endif

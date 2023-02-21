@@ -8,6 +8,7 @@
 int main(void)
 {
 	char *lineptr;
+	char **input;
 	size_t size = 32;
 	int i;
 
@@ -31,7 +32,8 @@ int main(void)
 			continue;
 		else
 		{
-			_execute(lineptr);
+			input = _strtok(lineptr, " ");
+			_execute(input);
 			if (strcmp(lineptr, "exit") == 0)
 				break;
 			free(lineptr);

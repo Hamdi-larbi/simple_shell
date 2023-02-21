@@ -2,15 +2,13 @@
 
 /**
  * _execute - execute the command line
- * @input : the string of command to be executed
+ * @args : the string of command to be executed
  * Return: 0
  */
 
-int _execute(char *input)
+int _execute(char **args)
 {
 	pid_t pid;
-	char *args[2];
-	extern char **environ;
 	int status;
 
 	pid = fork();
@@ -21,8 +19,6 @@ int _execute(char *input)
 	}
 	else if (pid == 0)
 	{
-		args[0] = input;
-		args[1] = NULL;
 		if (execve(args[0], args, environ) == -1)
 		{
 			perror("./hsh ");
