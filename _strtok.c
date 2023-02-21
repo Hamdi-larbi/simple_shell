@@ -11,7 +11,7 @@
 char **_strtok(char *str, const char *delim)
 {
 	char **ptr, *temp;
-	int i, j, k = 0, l = 0;
+	int i, j, m, n, k = 0, l = 0;
 
 	temp = malloc(strlen(str) + 1);
 	if (temp == NULL)
@@ -19,7 +19,7 @@ char **_strtok(char *str, const char *delim)
 		printf("ERROR: Memory allocation failed\n");
 		exit(1);
 	}
-	ptr = malloc(strlen(str) * 2);
+	ptr = malloc(strlen(str) * 2 * sizeof(char *));
 	if (ptr == NULL)
 	{
 		printf("ERROR: Memory allocation failed\n");
@@ -27,41 +27,42 @@ char **_strtok(char *str, const char *delim)
 	}
 	for (i = 0; str[i] != '\0'; i++)
 	{
-		printf("boucle i : %d\n", i);
 		for (j = 0; delim[j] != '\0'; j++)
 		{
-			printf("boucle j : %d\n", j);
 			if (str[i] == delim[j])
 			{
 				temp[l] = '\0';
-				printf("print temp de %d : %s\n", l, temp);
-				ptr[k++] = temp;
+				printf("temp %d : %s\n", k, temp);
+				for (m = 0; temp[m] != '\0'; m++)
+				{
+					printf("debugging\n");
+					ptr[k][m] = temp[m];
+				}
+				ptr[k++][m] = '\0';
 				free(temp);
-				printf("print ptr de %d : %s\n", k - 1 , ptr[k - 1]);
 				temp = malloc((strlen(str) + 2 - l));
 				if (temp == NULL)
 				{
 					printf("ERROR: Memory allocation failed\n");
 					exit(1);
 				}
-//				printf("j est egal a : %d\n", j);
 				l = 0;
 				break;
 			}
 		}
 		if (delim[j] == '\0')
 		{
-//			printf("la boucle j est fini : %d\n", j);
 			temp[l++] = str[i];
 		}
 
 	}
 	temp[l] = '\0';
-	printf("print temp de %d : %s\n", l, temp);
-	ptr[k++] = temp;
-	printf("print ptr de %d : %s\n", k - 1, ptr[k - 1]);
+	for (n = 0; temp[n] != '\0'; n++)
+	{
+		ptr[k][n] = temp[n];
+	}
+	ptr[k++][n] = '\0';
 	ptr[k] = NULL;
 	free(temp);
-	printf("c'est la fin de la fonction strtok");
 	return (ptr);
 }
