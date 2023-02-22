@@ -14,7 +14,7 @@ int main(void)
 
 	while (1)
 	{
-		printf("shell> ");
+		printf("#cisfun$ ");
 		lineptr = malloc(size * sizeof(char));
 		if (lineptr == NULL)
 		{
@@ -33,7 +33,7 @@ int main(void)
 		else
 		{
 			input = _strtok(lineptr, " ");
-			_execute(input);
+			check_execute(_command_path(input), input);
 			if (strcmp(lineptr, "exit") == 0)
 				break;
 			free(lineptr);

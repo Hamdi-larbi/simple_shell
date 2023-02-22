@@ -2,11 +2,12 @@
 
 /**
  * _execute - execute the command line
- * @args : the string of command to be executed
+ * @args : the string of arguments to be executed
+ * @command_path : the command to be executed
  * Return: 0
  */
 
-int _execute(char **args)
+int _execute(char *command_path, char **args)
 {
 	pid_t pid;
 	int status;
@@ -19,7 +20,7 @@ int _execute(char **args)
 	}
 	else if (pid == 0)
 	{
-		if (execve(args[0], args, environ) == -1)
+		if (execve(command_path, args, environ) == -1)
 		{
 			perror("./hsh ");
 			exit(EXIT_FAILURE);
