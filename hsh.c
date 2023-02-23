@@ -5,9 +5,9 @@
  * Return: 0.
  */
 
-int main(int ac, char **av, char **env)
+int main(void)
 {
-	char *lineptr, **input;
+	char *lineptr, **input, **env = environ;
 	size_t size = 32;
 	int i;
 
