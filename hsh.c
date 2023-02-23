@@ -5,10 +5,9 @@
  * Return: 0.
  */
 
-int main(void)
+int main(int ac, char **av, char **env)
 {
-	char *lineptr;
-	char **input;
+	char *lineptr, **input;
 	size_t size = 32;
 	int i;
 
@@ -24,19 +23,40 @@ int main(void)
 		i = _getline(&lineptr, &size, stdin);
 		if (i == -1)
 		{
+			free(lineptr);
 			printf("\n");
 			break;
 		}
 		lineptr[i - 1] = '\0';
 		if (strlen(lineptr) == 0)
+		{
+			free(lineptr);
 			continue;
+		}
 		else
 		{
-			input = _strtok(lineptr, " ");
-			check_execute(_command_path(input), input);
+		/*check build-in*/
 			if (strcmp(lineptr, "exit") == 0)
-				break;
-			free(lineptr);
+			{
+				free(lineptr);
+				exit(0);
+			}
+			else if (strcmp(lineptr, "env") == 0)
+			{
+				while (*env)
+				{
+					printf("%s\n", *env);
+					env++;
+				}
+				free(lineptr);
+			}
+			else
+			{
+				input = _strtok(lineptr, " ");
+				check_execute(_command_path(input), input);
+				free(lineptr);
+				free(input);
+			}
 		}
 	}
 	return (0);
