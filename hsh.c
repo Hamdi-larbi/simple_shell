@@ -7,7 +7,7 @@
 
 int main(void)
 {
-	char *lineptr, **input, **env = environ;
+	char *lineptr, **env = __environ;
 	size_t size = 32;
 	int i;
 
@@ -25,7 +25,8 @@ int main(void)
 		{
 			free(lineptr);
 			printf("\n");
-			break;
+			exit(0);
+		//	break;
 		}
 		lineptr[i - 1] = '\0';
 		if (strlen(lineptr) == 0)
@@ -52,10 +53,8 @@ int main(void)
 			}
 			else
 			{
-				input = _strtok(lineptr, " ");
-				check_execute(_command_path(input), input);
+				check_execute(lineptr);
 				free(lineptr);
-				free(input);
 			}
 		}
 	}
