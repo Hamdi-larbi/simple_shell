@@ -9,11 +9,13 @@ int main(void)
 {
 	char *lineptr, **env = __environ;
 	size_t size = 32;
-	int i;
+	int i, interactive;
 
+	interactive = isatty(STDIN_FILENO);
 	while (1)
 	{
-		printf("#cisfun$ ");
+		if (interactive)
+			printf("#cisfun$ ");
 		lineptr = malloc(size * sizeof(char));
 		if (lineptr == NULL)
 		{
