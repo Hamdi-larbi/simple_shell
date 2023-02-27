@@ -9,7 +9,7 @@
 
 int check_execute(char *lineptr)
 {
-	int i, j;
+	int i, j, k;
 	struct stat st;
 	char **path_dir, **input, **input_zero;
 
@@ -34,8 +34,14 @@ int check_execute(char *lineptr)
 		 if (stat(input[0], &st) == 0)
                         _execute(input[0], input);
 	}
+	for (k = 0; path_dir[k]; k++)
+		free(path_dir[k]);
 	free(path_dir);
+	for (k = 0; input[k]; k++)
+		free(input[k]);
 	free(input);
+	for (k = 0; input_zero[k]; k++)
+		free(input_zero[k]);
 	free(input_zero);
 	return (0);
 }

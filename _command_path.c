@@ -49,6 +49,9 @@ char ** _command_path(char **input)
 		}
 	}
 	command_path[i] = NULL;
+	for (i = 0; directories[i]; i++)
+		free(directories[i]);
 	free(directories);
+	free(path);
 	return (command_path);
 }
