@@ -9,7 +9,8 @@
 
 int check_execute(char *lineptr)
 {
-	int i, j, k;
+	int i, j;
+/*	int k;*/
 	struct stat st;
 	char **path_dir, **input, **input_zero;
 
