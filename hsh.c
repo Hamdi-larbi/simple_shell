@@ -28,7 +28,6 @@ int main(void)
 			free(lineptr);
 			printf("\n");
 			exit(0);
-		/*	break;*/
 		}
 		lineptr[i - 1] = '\0';
 		if (strlen(lineptr) == 0)
