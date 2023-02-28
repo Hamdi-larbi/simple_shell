@@ -12,7 +12,7 @@ char **_command_path(char **input)
 	char *path;
 	char **directories;
 	char **command_path;
-	int size_cpath = 4;
+	int size_cpath = 8;
 	int i, j, k;
 
 	path = getenv("PATH");
@@ -25,6 +25,16 @@ char **_command_path(char **input)
 	}
 	for (i = 0; directories[i]; i++)
 	{
+		if (i >= size_cpath)
+		{
+			size_cpath *= 2;
+			command_path = realloc(command_path, size_cpath * sizeof(*command_path));
+			if (command_path == NULL)
+			{
+				printf("ERROR: Memory allocation failed\n");
+				exit(1);
+			}
+		}
 		command_path[i] = malloc((strlen(directories[i]) + strlen(input[0]) + 2) * sizeof(char));
 		if (command_path[i] == NULL)
 		{
@@ -37,16 +47,6 @@ char **_command_path(char **input)
 		for (k = 0; input[0][k] != '\0'; k++)
 			command_path[i][j + 1 + k] = input[0][k];
 		command_path[i][j + 1 + k] = '\0';
-		if (i >= size_cpath)
-		{
-			size_cpath *= 2;
-			command_path = realloc(command_path, size_cpath * sizeof(*command_path));
-			if (command_path == NULL)
-			{
-				printf("ERROR: Memory allocation failed\n");
-				exit(1);
-			}
-		}
 	}
 	command_path[i] = NULL;
 	for (i = 0; directories[i]; i++)
