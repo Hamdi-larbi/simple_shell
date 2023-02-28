@@ -14,6 +14,8 @@ char **_strtok(char *str, const char *delim)
 	int i, j, m, n, k = 0, l = 0;
 	int ptr_size = 2;
 
+	if (str == NULL || delim == NULL)
+		return (NULL);
 	temp = malloc(strlen(str) + 1);
 	/*allocate memory for the temporary string*/
 	if (temp == NULL)
@@ -65,34 +67,34 @@ char **_strtok(char *str, const char *delim)
 							exit(1);
 						}
 					}
-					free(temp);
-					temp = NULL;
+				/*	free(temp);
+					temp = NULL;*/
 					/*free temp and then reallocate it to empty the temp string*/
-					temp = malloc((strlen(str) + 2 - l));
+				/*	temp = malloc((strlen(str) + 2 - l));
 					if (temp == NULL)
 					{
 						printf("ERROR: Memory allocation failed\n");
 						exit(1);
-					}
+					}*/
 					l = 0;
 					break;
 					/*break if there is a much*/
 				}
-				else
+			/*	else
 				{
 					free(temp);
-					temp = NULL;
+					temp = NULL;*/
 					/*free temp and then reallocate it to empty the temp string*/
-					temp = malloc((strlen(str) + 2 - l));
+			/*		temp = malloc((strlen(str) + 2 - l));
 					if (temp == NULL)
 					{
 						printf("ERROR: Memory allocation failed\n");
 						exit(1);
 					}
 					l = 0;
-					break;
+					break;*/
 					/*break if there is a much*/
-				}
+			/*	}*/
 			}
 		}
 		if (delim[j] == '\0')
