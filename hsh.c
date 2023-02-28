@@ -26,6 +26,7 @@ int main(void)
 		if (i == -1)
 		{
 			free(lineptr);
+			lineptr = NULL;
 		/*	printf("\n");*/
 			exit(0);
 		}
@@ -33,6 +34,7 @@ int main(void)
 		if (strlen(lineptr) == 0)
 		{
 			free(lineptr);
+			lineptr = NULL;
 			continue;
 		}
 		else
@@ -41,6 +43,7 @@ int main(void)
 			if (strcmp(lineptr, "exit") == 0)
 			{
 				free(lineptr);
+				lineptr = NULL;
 				exit(0);
 			}
 			else if (strcmp(lineptr, "env") == 0)
@@ -51,11 +54,13 @@ int main(void)
 					env++;
 				}
 				free(lineptr);
+				lineptr = NULL;
 			}
 			else
 			{
 				check_execute(lineptr);
 				free(lineptr);
+				lineptr = NULL;
 			}
 		}
 	}

@@ -50,8 +50,11 @@ char **_command_path(char **input)
 	}
 	command_path[i] = NULL;
 	for (i = 0; directories[i]; i++)
+	{
 		free(directories[i]);
+		directories[i] = NULL;
+	}
 	free(directories);
-/*	free(path);*/
+	directories = NULL;
 	return (command_path);
 }

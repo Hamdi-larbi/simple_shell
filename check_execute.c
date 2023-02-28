@@ -11,7 +11,7 @@ int check_execute(char *lineptr)
 {
 	int i, j;
 	int k;
-	struct stat st;
+	struct stat st = {0};
 	char **path_dir, **input, **input_zero;
 
 	input = _strtok(lineptr, " ");
@@ -36,13 +36,25 @@ int check_execute(char *lineptr)
                         _execute(input[0], input);
 	}
 	for (k = 0; path_dir[k]; k++)
+	{
 		free(path_dir[k]);
+		path_dir[k] = NULL;
+	}
 	free(path_dir);
+	path_dir = NULL;
 	for (k = 0; input[k]; k++)
+	{
 		free(input[k]);
+		input[k] = NULL;
+	}
 	free(input);
+	input = NULL;
 	for (k = 0; input_zero[k]; k++)
+	{
 		free(input_zero[k]);
+		input_zero[k] = NULL;
+	}
 	free(input_zero);
+	input_zero = NULL;
 	return (0);
 }

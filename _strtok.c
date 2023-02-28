@@ -66,6 +66,7 @@ char **_strtok(char *str, const char *delim)
 						}
 					}
 					free(temp);
+					temp = NULL;
 					/*free temp and then reallocate it to empty the temp string*/
 					temp = malloc((strlen(str) + 2 - l));
 					if (temp == NULL)
@@ -80,6 +81,7 @@ char **_strtok(char *str, const char *delim)
 				else
 				{
 					free(temp);
+					temp = NULL;
 					/*free temp and then reallocate it to empty the temp string*/
 					temp = malloc((strlen(str) + 2 - l));
 					if (temp == NULL)
@@ -122,5 +124,6 @@ char **_strtok(char *str, const char *delim)
 		ptr[k] = NULL;
 	}
 	free(temp);
+	temp = NULL;
 	return (ptr);
 }
