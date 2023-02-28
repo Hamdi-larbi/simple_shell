@@ -23,7 +23,7 @@ int _execute(char *command_path, char **args)
 		if (execve(command_path, args, environ) == -1)
 		{
 			perror("./hsh ");
-			exit(EXIT_FAILURE);
+			exit(1);
 		}
 	}
 	else
@@ -31,7 +31,7 @@ int _execute(char *command_path, char **args)
 		if (wait(&status) == -1)
 		{
 			perror("wait");
-			exit(EXIT_FAILURE);
+			exit(1);
 		}
 	}
 	return (0);
