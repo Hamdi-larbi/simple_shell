@@ -12,7 +12,7 @@ char **_strtok(char *str, const char *delim)
 {
 	char **ptr, *temp;
 	int i, j, m, n, k = 0, l = 0;
-	int ptr_size = 2;
+	int ptr_size = 8;
 
 	if (str == NULL || delim == NULL)
 		return (NULL);
@@ -36,6 +36,17 @@ char **_strtok(char *str, const char *delim)
 		for (j = 0; delim[j] != '\0'; j++)
 			/*loop on the delimiter*/
 		{
+			if (k >= ptr_size)
+					/*test if the memory allocated to ptr still fit*/
+			{
+				ptr_size *= 2;
+				ptr = realloc(ptr, ptr_size * sizeof(char *));
+				if (ptr == NULL)
+				{
+					printf("ERROR: Memory allocation failed\n");
+					exit(1);
+				}
+			}
 			if (str[i] == delim[j])
 				/*test if there is a much withe the delimiter*/
 			{
@@ -56,17 +67,6 @@ char **_strtok(char *str, const char *delim)
 						ptr[k][m] = temp[m];
 					}
 					ptr[k++][m] = '\0';
-					if (k >= ptr_size)
-					/*test if the memory allocated to ptr still fit*/
-					{
-						ptr_size *= 2;
-						ptr = realloc(ptr, ptr_size * sizeof(char *));
-						if (ptr == NULL)
-						{
-							printf("ERROR: Memory allocation failed\n");
-							exit(1);
-						}
-					}
 				/*	free(temp);
 					temp = NULL;*/
 					/*free temp and then reallocate it to empty the temp string*/
