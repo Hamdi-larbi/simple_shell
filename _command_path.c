@@ -17,7 +17,7 @@ char **_command_path(char **input)
 
 	path = getenv("PATH");
 	directories = _strtok(path, ":");
-	command_path = malloc(size_cpath * sizeof(char *));
+	command_path = malloc(size_cpath * sizeof(*command_path));
 	if (command_path == NULL)
 	{
 		printf("ERROR: Memory allocation failed\n");
@@ -40,7 +40,7 @@ char **_command_path(char **input)
 		if (i >= size_cpath)
 		{
 			size_cpath *= 2;
-			command_path = realloc(command_path, size_cpath * sizeof(char *));
+			command_path = realloc(command_path, size_cpath * sizeof(*command_path));
 			if (command_path == NULL)
 			{
 				printf("ERROR: Memory allocation failed\n");
