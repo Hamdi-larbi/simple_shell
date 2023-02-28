@@ -16,7 +16,10 @@ int check_execute(char *lineptr)
 
 	input = _strtok(lineptr, " ");
 	if (input[0] == NULL)
+	{
+		free(input);
 		return (-1);
+	}
 	path_dir = _command_path(input);
 	input_zero = _strtok(input[0], "/");
 	for (j = 0; input_zero[j]; j++)
