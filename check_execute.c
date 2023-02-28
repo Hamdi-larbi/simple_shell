@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * check_execute - check if command found 
+ * check_execute - check if command found
  * in path and execute the program
  * @lineptr : string of commands from the std input
  * Return: 0
@@ -15,13 +15,15 @@ int check_execute(char *lineptr)
 	char **path_dir, **input, **input_zero;
 
 	input = _strtok(lineptr, " ");
+	if (input[0] == NULL)
+		return (-1);
 	path_dir = _command_path(input);
 	input_zero = _strtok(input[0], "/");
 	for (j = 0; input_zero[j]; j++)
 		;
 	if (j <= 1)
 	{
-		for (i =0; path_dir[i] != NULL; i++)
+		for (i = 0; path_dir[i] != NULL; i++)
 		{
 			if (stat(path_dir[i], &st) == 0)
 			{
@@ -32,8 +34,8 @@ int check_execute(char *lineptr)
 	}
 	else
 	{
-		 if (stat(input[0], &st) == 0)
-                        _execute(input[0], input);
+		if (stat(input[0], &st) == 0)
+			_execute(input[0], input);
 	}
 	for (k = 0; path_dir[k]; k++)
 	{

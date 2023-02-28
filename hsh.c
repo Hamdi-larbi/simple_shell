@@ -27,7 +27,6 @@ int main(void)
 		{
 			free(lineptr);
 			lineptr = NULL;
-		/*	printf("\n");*/
 			exit(0);
 		}
 		lineptr[i - 1] = '\0';
