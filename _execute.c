@@ -4,13 +4,13 @@
  * _execute - execute the command line
  * @args : the string of arguments to be executed
  * @command_path : the command to be executed
- * Return: 0
+ * Return: the shell status
  */
 
 int _execute(char *command_path, char **args)
 {
 	pid_t pid;
-	int status;
+	int status, shell_status = 0;
 
 	pid = fork();
 	if (pid == -1)
@@ -34,5 +34,9 @@ int _execute(char *command_path, char **args)
 			exit(1);
 		}
 	}
-	return (0);
+	if (WIFEXITED(status))
+	{
+		shell_status = WEXITSTATUS(status);
+	}
+	return (shell_status);
 }

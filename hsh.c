@@ -9,7 +9,7 @@ int main(void)
 {
 	char *lineptr, **env = __environ;
 	size_t size = 32;
-	int i, interactive;
+	int i, interactive, shell_status = 0;
 
 	interactive = isatty(STDIN_FILENO);
 	while (1)
@@ -43,7 +43,7 @@ int main(void)
 			{
 				free(lineptr);
 				lineptr = NULL;
-				exit(0);
+				exit(shell_status);
 			}
 			else if (strcmp(lineptr, "env") == 0)
 			{
@@ -57,7 +57,7 @@ int main(void)
 			}
 			else
 			{
-				check_execute(lineptr);
+				shell_status = check_execute(lineptr);
 				free(lineptr);
 				lineptr = NULL;
 			}

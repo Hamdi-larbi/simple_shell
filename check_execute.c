@@ -4,13 +4,13 @@
  * check_execute - check if command found
  * in path and execute the program
  * @lineptr : string of commands from the std input
- * Return: 0
+ * Return: shell status
  */
 
 int check_execute(char *lineptr)
 {
 	int i, j;
-	int k;
+	int k, shell_status = 0;
 	struct stat st = {0};
 	char **path_dir, **input, **input_zero;
 
@@ -38,7 +38,7 @@ int check_execute(char *lineptr)
 	else
 	{
 		if (stat(input[0], &st) == 0)
-			_execute(input[0], input);
+			shell_status = _execute(input[0], input);
 	}
 	for (k = 0; path_dir[k]; k++)
 	{
@@ -61,5 +61,5 @@ int check_execute(char *lineptr)
 	}
 	free(input_zero);
 	input_zero = NULL;
-	return (0);
+	return (shell_status);
 }
